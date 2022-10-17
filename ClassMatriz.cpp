@@ -19,7 +19,7 @@ double divValues(double a, double b){
         return a / b;
 }
 
-class Matrix {
+class Matrix{
     public:
     const int row;
     const int column;
@@ -28,6 +28,10 @@ class Matrix {
     Matrix(int rows, int columns) : row(rows), column(columns){
         vector<vector<double>> vetor(rows, vector<double>(columns));
         values = vetor;
+    }
+
+    ~Matrix(){
+        //não sei oq fazer aqui
     }
 
     void print(){
