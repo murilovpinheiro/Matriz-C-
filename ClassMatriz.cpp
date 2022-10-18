@@ -8,7 +8,9 @@ double sumValues(double a, double b){
 }
 
 double subValues(double a, double b){
-        return a - b;
+        double value = a - b;
+        if((value < 0.0001 && value > 0 ) || (value > - 0.0001 && value < 0) ) value = 0;
+        return value;
 }
 
 double multValues(double a, double b){
@@ -63,11 +65,9 @@ class Matrix{
         else if(column != row2.size()){
             return -2;
         }
-        double value;
         for(int i = 0; i < column; i++){
-            value = operation(values.at(row1).at(i), row2.at(i));
-            if(value < 0.0001 && value > 0) value = 0;
-            values.at(row1).at(i) = value;
+            // esse if é para multiplicações na eliminação gaussiana sem pivotação onde temos valores muito próximos de 0 como resultado de multiplicação
+            values.at(row1).at(i) = operation(values.at(row1).at(i), row2.at(i));
         }
         return 0;
     }
@@ -139,10 +139,10 @@ class Matrix{
 };
 
 int main(){
-    Matrix m(3, 3);
-    m.values.at(0).at(0) =  1; m.values.at(0).at(1) =  3; m.values.at(0).at(2) = -1;
-    m.values.at(1).at(0) =  2; m.values.at(1).at(1) =  1; m.values.at(1).at(2) =  1;
-    m.values.at(2).at(0) =  3; m.values.at(2).at(1) = -1; m.values.at(2).at(2) =  1;
+    Matrix m(3, 4);
+    m.values.at(0).at(0) =  3; m.values.at(0).at(1) =  2; m.values.at(0).at(2) =  4; m.values.at(0).at(3) = 1;
+    m.values.at(1).at(0) =  1; m.values.at(1).at(1) =  1; m.values.at(1).at(2) =  2; m.values.at(1).at(3) = 2;
+    m.values.at(2).at(0) =  4; m.values.at(2).at(1) =  3; m.values.at(2).at(2) = -2; m.values.at(2).at(3) = 3;
     
     //eliminação de Gauss aparentemente funcionando
     //tá tendo aquela problema caso o valor seja MUITO próximo de 0

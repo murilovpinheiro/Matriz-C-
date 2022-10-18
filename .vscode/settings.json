@@ -44,6 +44,11 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "expected": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "variant": "cpp"
     }
 }
