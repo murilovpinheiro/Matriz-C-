@@ -30,10 +30,6 @@ class Matrix{
         values = vetor;
     }
 
-    ~Matrix(){
-        //não sei oq fazer aqui
-    }
-
     void print(){
         for(int i = 0; i < row; i++){
             for(int j = 0; j < column; j++){
@@ -60,17 +56,28 @@ class Matrix{
         return 0;
     }
 
-    int opBetweenLines(int row1, int row2, function<double(double, double)> operation){
-        if(row1 >= row || row2 >= row){
+    int opBetweenLines(int row1, vector<double> row2, function<double(double, double)> operation){
+        if(row1 >= row || row1 < 0){
             return -1;
         }
-        else if(row1 < 0 || row2 < 0){
+        else if(column != row2.size()){
             return -2;
         }
+        double value;
         for(int i = 0; i < column; i++){
-            values.at(row1).at(i) = operation(values.at(row1).at(i), values.at(row2).at(i));
+            value = operation(values.at(row1).at(i), row2.at(i));
+            if(value < 0.0001 && value > 0) value = 0;
+            values.at(row1).at(i) = value;
         }
         return 0;
+    }
+
+    vector<double> multLine(double value, int line){
+        vector<double> aux(column);
+        for (int i = 0; i < column; i++){
+            aux.at(i) = (values.at(line).at(i) * value);
+        }
+        return aux;
     }
 
     int opEscalar(double value, function<double(double, double)> operador){
@@ -94,21 +101,54 @@ class Matrix{
         return 0;
     }
 
+    int multMatrix(Matrix m1){
+        if(column == m1.row){
+            vector<vector<double>> aux(row, vector<double>(column));
+            for(int i = 0; i < row; i++){
+                for(int j = 0; j < row; j++){
+                    for(int k = 0; k < row; k++){
+                        aux.at(i).at(j) += values.at(i).at(k) * m1.values.at(k).at(j);
+                    }
+                }
+            }
+            values = aux;
+            return 0;
+        }
+        return -1;
+    }
+
+    int GaussElimation(){
+        for(int i = 0; i < row; i++){
+            eliminateLine(i);
+        }
+        return 0;
+    }
+
+    int eliminateLine(int coord){
+        double pivot = values.at(coord).at(coord);
+        double value;
+        vector<double> aux;
+        for(int i = coord + 1; i < row; i++){
+            value = values.at(i).at(coord)/values.at(coord).at(coord);
+            aux = multLine(value, coord);
+            opBetweenLines(i, aux, subValues);
+        }
+        return 0;
+    }
+
 };
 
 int main(){
     Matrix m(3, 3);
-    Matrix m2(3, 3);
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            m.inputValue(i, j, i + j + 1);
-            m2.inputValue(j, i, i + j + 2);
-        }
-    }
+    m.values.at(0).at(0) =  1; m.values.at(0).at(1) =  3; m.values.at(0).at(2) = -1;
+    m.values.at(1).at(0) =  2; m.values.at(1).at(1) =  1; m.values.at(1).at(2) =  1;
+    m.values.at(2).at(0) =  3; m.values.at(2).at(1) = -1; m.values.at(2).at(2) =  1;
+    
+    //eliminação de Gauss aparentemente funcionando
+    //tá tendo aquela problema caso o valor seja MUITO próximo de 0
+    //então quando o valor está em um limite tal, eu simplesmente aproximo pra 0
+    //pensar em como fazer pra adicionar o vetor de respostas
     m.print();
-    cout << '\n';
-    m2.print();
-    cout << '\n';
-    m.opEscalar(5, divValues);
+    m.GaussElimation();
     m.print();
 }
