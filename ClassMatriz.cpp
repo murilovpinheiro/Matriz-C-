@@ -117,13 +117,6 @@ class Matrix{
         return -1;
     }
 
-    int GaussElimation(){
-        for(int i = 0; i < row; i++){
-            eliminateLine(i);
-        }
-        return 0;
-    }
-
     int eliminateLine(int coord){
         double pivot = values.at(coord).at(coord);
         double value;
@@ -136,19 +129,51 @@ class Matrix{
         return 0;
     }
 
+    int GaussElimination(){
+        //Depois fazer ifs para casos onde temos sistemas sem resolução
+        //Ex: tamanhos não quadrados e determinantes 
+        //Por enquanto o vetor resposta é imbutido na matriz, mas acho que é melhor fazer separado
+        for(int i = 0; i < row; i++){
+            eliminateLine(i);
+        }
+        return 0;
+    }
+
+    int resolutionTriangleUpper(){
+        vector<double> X(row);
+        X.at(row - 1) = values.at(row - 1).at(column - 1)/ values.at(row - 1).at(column - 2);
+        for(int i = row - 2; i >= 0; i--){
+            double S = 0;
+            for(int j = i + 1; j < column - 1; j++){
+                S = S + values.at(i).at(j) * X.at(j);
+            }
+            X.at(i) = (values.at(i).at(column - 1) - S)/(values.at(i).at(i));
+        }
+        cout << "Resposta da Matriz: [ ";
+        for(int i = 0; i < row; i++){
+                cout << X.at(i) << ' ';
+        }
+        cout << "]";
+        return 0;
+    }
+
 };
 
 int main(){
     Matrix m(3, 4);
-    m.values.at(0).at(0) =  3; m.values.at(0).at(1) =  2; m.values.at(0).at(2) =  4; m.values.at(0).at(3) = 1;
-    m.values.at(1).at(0) =  1; m.values.at(1).at(1) =  1; m.values.at(1).at(2) =  2; m.values.at(1).at(3) = 2;
-    m.values.at(2).at(0) =  4; m.values.at(2).at(1) =  3; m.values.at(2).at(2) = -2; m.values.at(2).at(3) = 3;
+    m.inputValue(0, 0, 3); m.inputValue(0, 1, 4); m.inputValue(0, 2, 2); m.inputValue(0, 3, 1);
+    m.inputValue(1, 0, 7); m.inputValue(1, 1, -2); m.inputValue(1, 2, 3); m.inputValue(1, 3, 5);
+    m.inputValue(2, 0, 2); m.inputValue(2, 1, 1); m.inputValue(2, 2, 8); m.inputValue(2, 3, -4);
     
     //eliminação de Gauss aparentemente funcionando
     //tá tendo aquela problema caso o valor seja MUITO próximo de 0
     //então quando o valor está em um limite tal, eu simplesmente aproximo pra 0
     //pensar em como fazer pra adicionar o vetor de respostas
-    m.print();
-    m.GaussElimation();
-    m.print();
+    
+
+    m.GaussElimination();
+    m.resolutionTriangleUpper();
+    //resolucao aparentemente funcionando bem
+   
+    //m.print();
 }

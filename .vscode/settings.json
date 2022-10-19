@@ -49,6 +49,8 @@
         "optional": "cpp",
         "ratio": "cpp",
         "regex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "ranges": "cpp",
+        "stacktrace": "cpp"
     }
 }
