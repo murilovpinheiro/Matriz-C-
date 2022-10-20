@@ -5,10 +5,14 @@
 
 using namespace std;
 
+//Construtor da Classe Matriz
+
     Matrix::Matrix(int rows, int columns) : row(rows), column(columns){
         vector<vector<double>> vetor(rows, vector<double>(columns));
         values = vetor;
     }
+//IDEIA:
+//Pensando em separar os métodos da ideia de matriz e tornar eles algo independente, com checagens e outras coisas
 
     void Matrix::print(){
         for(int i = 0; i < row; i++){
@@ -18,6 +22,7 @@ using namespace std;
             cout << '\n';
         }
     }
+
 
     void Matrix::inputValue(int i, int j, double value){
         values.at(i).at(j) = value;
@@ -104,51 +109,3 @@ using namespace std;
         }
         return -1;
     }
-
-    //um subprocesso da eliminacao de Gauss, basicamente zera todo a coluna exceto o pivo e tudo acima dele
-    //utilizando claro apenas as operacoes que mantenham a condicao de sistema equivalente
-    int Matrix::eliminateColumn(int coord){
-        double pivot = values.at(coord).at(coord);
-        double value;
-        vector<double> aux;
-        for(int i = coord + 1; i < row; i++){
-            value = values.at(i).at(coord)/values.at(coord).at(coord);
-            aux = multLine(value, coord);
-            opBetweenLines(i, aux, subValues);
-        }
-        return 0;
-    }
-
-    //Eliminacao de Gauss, transforma a matriz em sua equivalente triangular superior
-    int Matrix::GaussElimination(){
-        //Depois fazer ifs para casos onde temos sistemas sem resolução
-        //Ex: tamanhos não quadrados e determinantes 
-        //Por enquanto o vetor resposta é imbutido na matriz, mas acho que é melhor fazer separado
-        for(int i = 0; i < row; i++){
-            eliminateColumn(i);
-        }
-        return 0;
-    }
-
-    //metodo resolutor da matriz triangular superior
-    //basicamente vai descobrindo os valores do vetor resposta
-    //atualmente ta so printando os resultados mas posteriormente posso aprimorar
-    int Matrix::resolutionTriangleUpper(){
-        vector<double> X(row);
-        X.at(row - 1) = values.at(row - 1).at(column - 1)/ values.at(row - 1).at(column - 2);
-        for(int i = row - 2; i >= 0; i--){
-            double S = 0;
-            for(int j = i + 1; j < column - 1; j++){
-                S = S + values.at(i).at(j) * X.at(j);
-            }
-            X.at(i) = (values.at(i).at(column - 1) - S)/(values.at(i).at(i));
-        }
-        cout << "Resposta da Matriz: [ ";
-        for(int i = 0; i < row; i++){
-                cout << X.at(i) << ' ';
-        }
-        cout << "]";
-        return 0;
-    }
-
-    //fazer pivotacao simples, nao pretendo fazer a total, e apos isso comecar outros Metodos (Gauss-Jordan, LU e outros)

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./Classes/ClassMatriz.h"
+#include "./Classes/Gauss.h"
 
 using namespace std;
 
@@ -14,9 +14,11 @@ int main(){
     //então quando o valor está em um limite tal, eu simplesmente aproximo pra 0
     //pensar em como fazer pra adicionar o vetor de respostas
     
+    Gauss g(3);
 
-    m.GaussElimination();
-    m.resolutionTriangleUpper();
+    g.transformar(&m);
+
+    g.resolver(&m);
     //resolucao aparentemente funcionando bem
    
     //m.print();

@@ -6,12 +6,12 @@
 using namespace std;
 
 class Matrix{
-    private:
+    public:
     const int row;
     const int column;
     vector<vector<double>> values;
 
-    public:
+    Matrix();
 
     Matrix(int rows, int columns);
 
@@ -30,10 +30,4 @@ class Matrix{
     int opMatrix(Matrix m1, function<double(double,double)> operation);
 
     int multMatrix(Matrix m1);
-    
-    int eliminateColumn(int coord);
-    
-    int GaussElimination();
-    
-    int resolutionTriangleUpper();
 };
