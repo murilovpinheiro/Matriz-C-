@@ -13,8 +13,6 @@
             aux = m->multLine(value, coord);
             m->opBetweenLines(i, aux, subValues);
         }
-        m->print();
-        cout << '\n';
         return 0;
     }
 
@@ -24,7 +22,6 @@
         //Ex: tamanhos não quadrados e determinantes 
         //Por enquanto o vetor resposta é imbutido na matriz, mas acho que é melhor fazer separado
         for(int i = 0; i < m->row - 1; i++){
-            cout << "ROTACAO: " << i << '\n';
             eliminateColumn(i, m);
         }
         
@@ -44,10 +41,6 @@
             }
             X.at(i) = (m->values.at(i).at(m->column - 1) - S)/(m->values.at(i).at(i));
         }
-        cout << "Resposta da Matriz: [ ";
-        for(int i = 0; i < m->row; i++){
-                cout << X.at(i) << ' ';
-        }
-        cout << "]";
+        resposta = X;
         return 0;
     }

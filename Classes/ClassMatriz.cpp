@@ -23,7 +23,6 @@ using namespace std;
         }
     }
 
-
     void Matrix::inputValue(int i, int j, double value){
         values.at(i).at(j) = value;
     }
