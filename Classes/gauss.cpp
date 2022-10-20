@@ -23,7 +23,8 @@
         //Depois fazer ifs para casos onde temos sistemas sem resolução
         //Ex: tamanhos não quadrados e determinantes 
         //Por enquanto o vetor resposta é imbutido na matriz, mas acho que é melhor fazer separado
-        for(int i = 0; i < m->row; i++){
+        for(int i = 0; i < m->row - 1; i++){
+            cout << "ROTACAO: " << i << '\n';
             eliminateColumn(i, m);
         }
         
