@@ -1,26 +1,16 @@
-#include <iostream>
 #include <vector>
 #include <bits/stdc++.h>
-#include "operations.h"
+#include "../Operations/operations.h"
+#include "./ClassMatriz.h"
+
 using namespace std;
 
-
-//Func. que servem como operacoes nas operacoes de matrizes
-
-
-class Matrix{
-    private:
-    const int row;
-    const int column;
-    vector<vector<double>> values;
-
-    public:
-    Matrix(int rows, int columns) : row(rows), column(columns){
+    Matrix::Matrix(int rows, int columns) : row(rows), column(columns){
         vector<vector<double>> vetor(rows, vector<double>(columns));
         values = vetor;
     }
 
-    void print(){
+    void Matrix::print(){
         for(int i = 0; i < row; i++){
             for(int j = 0; j < column; j++){
                 cout << values[i][j] << ' ';
@@ -29,12 +19,12 @@ class Matrix{
         }
     }
 
-    void inputValue(int i, int j, double value){
+    void Matrix::inputValue(int i, int j, double value){
         values.at(i).at(j) = value;
     }
 
     //metodo que troca duas linhas entre se de uma mesma matriz
-    int swapLines(int row1, int row2){
+    int Matrix::swapLines(int row1, int row2){
         if(row1 >= row || row2 >= row){
             return -1;
         }
@@ -49,7 +39,7 @@ class Matrix{
 
     //esse metodo realiza alguma operacao entre uma linha da Matriz e outro vetor linha
     //metodo util na Eliminacao de Gauss
-    int opBetweenLines(int row1, vector<double> row2, function<double(double, double)> operation){
+    int Matrix::opBetweenLines(int row1, vector<double> row2, function<double(double, double)> operation){
         if(row1 >= row || row1 < 0){
             return -1;
         }
@@ -64,7 +54,7 @@ class Matrix{
 
     //recebe multiplica uma linha da Matriz por um valor escalar, retorna a linha multiplicada, nao modifica a matriz original
     //utilizado tambem na Eliminacao de Gauss
-    vector<double> multLine(double value, int line){
+    vector<double> Matrix::multLine(double value, int line){
         vector<double> aux(column);
         for (int i = 0; i < column; i++){
             aux.at(i) = (values.at(line).at(i) * value);
@@ -74,7 +64,7 @@ class Matrix{
 
     //operacao de uma matriz inteira com um Escalar
     //as Operacoes podem ser soma, subtracao, divisao ou mult.
-    int opEscalar(double value, function<double(double, double)> operador){
+    int Matrix::opEscalar(double value, function<double(double, double)> operador){
         for (int i = 0; i < row; i++){
             for(int j = 0; j < column; j++){
                 values.at(i).at(j) = operador(values.at(i).at(j), value);
@@ -86,7 +76,7 @@ class Matrix{
     //operacoes entre 2 matrizes
     //as operacoes podem ser subtracao e soma, futuro adicionar algum meio de evitar a multiplicacao e a divisao como entrada
     //como utiliza funcao de alta ordem, nao tenho muita ideia de como fazer isso direitinho
-    int opMatrix(Matrix m1, function<double(double,double)> operation){
+    int Matrix::opMatrix(Matrix m1, function<double(double,double)> operation){
         if (m1.row != row || m1.column != column){
             return -1;
         }
@@ -99,7 +89,7 @@ class Matrix{
     }
 
     //multiplicacao entre 2 matrizes
-    int multMatrix(Matrix m1){
+    int Matrix::multMatrix(Matrix m1){
         if(column == m1.row){
             vector<vector<double>> aux(row, vector<double>(column));
             for(int i = 0; i < row; i++){
@@ -117,7 +107,7 @@ class Matrix{
 
     //um subprocesso da eliminacao de Gauss, basicamente zera todo a coluna exceto o pivo e tudo acima dele
     //utilizando claro apenas as operacoes que mantenham a condicao de sistema equivalente
-    int eliminateColumn(int coord){
+    int Matrix::eliminateColumn(int coord){
         double pivot = values.at(coord).at(coord);
         double value;
         vector<double> aux;
@@ -130,7 +120,7 @@ class Matrix{
     }
 
     //Eliminacao de Gauss, transforma a matriz em sua equivalente triangular superior
-    int GaussElimination(){
+    int Matrix::GaussElimination(){
         //Depois fazer ifs para casos onde temos sistemas sem resolução
         //Ex: tamanhos não quadrados e determinantes 
         //Por enquanto o vetor resposta é imbutido na matriz, mas acho que é melhor fazer separado
@@ -143,7 +133,7 @@ class Matrix{
     //metodo resolutor da matriz triangular superior
     //basicamente vai descobrindo os valores do vetor resposta
     //atualmente ta so printando os resultados mas posteriormente posso aprimorar
-    int resolutionTriangleUpper(){
+    int Matrix::resolutionTriangleUpper(){
         vector<double> X(row);
         X.at(row - 1) = values.at(row - 1).at(column - 1)/ values.at(row - 1).at(column - 2);
         for(int i = row - 2; i >= 0; i--){
@@ -162,23 +152,3 @@ class Matrix{
     }
 
     //fazer pivotacao simples, nao pretendo fazer a total, e apos isso comecar outros Metodos (Gauss-Jordan, LU e outros)
-};
-
-int main(){
-    Matrix m(3, 4);
-    m.inputValue(0, 0, 3); m.inputValue(0, 1, 4); m.inputValue(0, 2, 2); m.inputValue(0, 3, 1);
-    m.inputValue(1, 0, 7); m.inputValue(1, 1, -2); m.inputValue(1, 2, 3); m.inputValue(1, 3, 5);
-    m.inputValue(2, 0, 2); m.inputValue(2, 1, 1); m.inputValue(2, 2, 8); m.inputValue(2, 3, -4);
-    
-    //eliminação de Gauss aparentemente funcionando
-    //tá tendo aquela problema caso o valor seja MUITO próximo de 0
-    //então quando o valor está em um limite tal, eu simplesmente aproximo pra 0
-    //pensar em como fazer pra adicionar o vetor de respostas
-    
-
-    m.GaussElimination();
-    m.resolutionTriangleUpper();
-    //resolucao aparentemente funcionando bem
-   
-    //m.print();
-}

@@ -1,7 +1,4 @@
 #pragma once
-#include <iostream>
-#include "operations.h"
-
 
 	double sumValues(double a, double b);
 

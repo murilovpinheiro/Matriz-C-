@@ -1,4 +1,5 @@
 #include "operations.h"
+#include "./operations.h"
 
 double sumValues(double a, double b){
         return a + b;
