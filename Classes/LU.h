@@ -10,5 +10,7 @@ class LU : public MetodoNumerico {
 
     int transformar(Matrix* m, Matrix* l);
 
-    int resolver(Matrix* m);
+    int resolverL(Matrix* U, Matrix* m);
+
+    int resolverU(Matrix* m);
 };
