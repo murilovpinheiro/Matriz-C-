@@ -1,6 +1,5 @@
 #include <vector>
 #include <bits/stdc++.h>
-#include "../Operations/operations.h"
 #include "./ClassMatriz.h"
 
 using namespace std;

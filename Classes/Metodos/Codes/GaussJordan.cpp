@@ -1,4 +1,4 @@
-#include "./GaussJordan.h"
+#include "../Headers/GaussJordan.h"
 
 GaussJordan::GaussJordan(int n) : MetodoNumerico(n) {}
 

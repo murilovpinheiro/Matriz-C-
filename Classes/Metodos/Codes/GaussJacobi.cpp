@@ -1,4 +1,4 @@
-#include "./GaussJacobi.h"
+#include "../Headers/GaussJacobi.h"
 
 GaussJacobi::GaussJacobi(int n) : MetodoNumerico(n){}
 

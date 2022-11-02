@@ -1,3 +1,4 @@
+#pragma once
 #include "./MetodoNumerico.h"
 
 class GaussJacobi : public MetodoNumerico{

@@ -1,5 +1,5 @@
 #pragma once
-#include "./ClassMatriz.h"
+#include "../../ClassMatriz/ClassMatriz.h"
 
 class MetodoNumerico {
     public:

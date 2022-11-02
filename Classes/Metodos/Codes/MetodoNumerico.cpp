@@ -1,5 +1,4 @@
-#include "./MetodoNumerico.h"
-#include "./ClassMatriz.h"
+#include "../Headers/MetodoNumerico.h"
 
     MetodoNumerico::MetodoNumerico(int n){
         vector<double> aux(n);

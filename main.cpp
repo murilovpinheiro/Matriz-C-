@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./Classes/GaussJacobi.h"
+#include "./Classes/Metodos/Headers/GaussJacobi.h"
 
 using namespace std;
 

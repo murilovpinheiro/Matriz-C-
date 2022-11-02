@@ -1,4 +1,4 @@
-#include "./LU.h"
+#include "../Headers/LU.h"
 
 LU::LU(int n) : MetodoNumerico(n) {}
 
