@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "../../ClassMatriz/ClassMatriz.h"
 
 class MetodoNumerico {

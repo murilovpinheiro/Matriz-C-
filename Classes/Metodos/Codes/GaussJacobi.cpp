@@ -29,35 +29,55 @@ int GaussJacobi::obterG(Matrix *m, vector<double> *g){
     return 0;
 }
 
+
+double GaussJacobi::maximaDistancia(vector<double> vetor1, vector<double> vetor2, int size){
+    double max = 0;
+    for(int i = 0; i < size; i++){
+            if(abs(vetor1.at(i) - vetor2.at(i)) > max){
+                max = abs(vetor1.at(i) - vetor2.at(i));
+            }
+    }
+    return max;
+}
+
 int GaussJacobi::resolver(Matrix *m, double eps){
-    vector<double> x0(m->row);
     vector<double> xK(m->row);
+    vector<double> xKMinus1(m->row);
+    vector<double> result(m->row);
     vector<vector<double>> c(m->row, vector<double>(m->column - 1));
     vector<double> g(m->row);
     obterC(m, &c);
     obterG(m, &g);
-    obterXZero(m, &x0);
-    for(int i = 0; i < m->row; i++){
-        cout << x0.at(i)<<'\n';
-    }
-    for(int i = 0; i < m->row; i++){
-        for(int j = 0; j < m->column - 1; j++){
-            cout << c.at(i).at(j) << "  ";
+    obterXZero(m, &xK);
+    // for(int i = 0; i < m->row; i++){
+    //     cout << x0.at(i)<<'\n';
+    // }
+    // for(int i = 0; i < m->row; i++){
+    //     for(int j = 0; j < m->column - 1; j++){
+    //         cout << c.at(i).at(j) << "  ";
+    //     }
+    //     cout << '\n';
+    // }
+    // for(int i = 0; i < m->row; i++){
+    //     cout << g.at(i)<<'\n';
+    // }
+    double aux;
+    double dist_max = 1000000;
+    while ( dist_max > eps){
+        xKMinus1 = xK;
+        for(int i = 0; i < m->row; i++){
+            aux = 0;
+            for(int j = 0; j < m->column - 1; j++){
+                if(j == i) continue;
+                aux += -(m->values.at(i).at(j)) * xK.at(j);
+            }
+            aux += (m->values.at(i).at(m->column - 1));
+            result.at(i) = 1/m->values.at(i).at(i) * aux;
         }
-        cout << '\n';
+        xK = result;
+        dist_max = maximaDistancia(xKMinus1, xK, m->row);
     }
-    for(int i = 0; i < m->row; i++){
-        cout << g.at(i)<<'\n';
-    }
-    //Processo Iterativo:
-    /*double aux;
-    for(int i = 0; i < m->row; i++){
-        aux = 0;
-        for(int j = 0; i < m->column - 1; i++){
-            aux += m->
-        }
-    }*/
-
-
+        resposta = xK;
+        //FALTA SÓ A ITERAÇÃO E O TESTE DO ERRO
     return 0;
 }

@@ -16,7 +16,9 @@ int main(){
     
     GaussJacobi GJ(3);
 
-    GJ.resolver(&m, 0.03);
-    
-    
+    GJ.resolver(&m, 0.05);
+
+    for(int i = 0; i < m.row; i++){
+        cout << GJ.resposta[i] << '\n';
+    }
 }
