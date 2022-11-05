@@ -1,4 +1,4 @@
-#include "../Headers/Gauss.h"
+#include "../Headers/gauss.h"
 
     Gauss::Gauss(int n) : MetodoNumerico(n) {}
 

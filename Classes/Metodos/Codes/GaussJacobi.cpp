@@ -63,7 +63,8 @@ int GaussJacobi::resolver(Matrix *m, double eps){
     // }
     double aux;
     double dist_max = 1000000;
-    while ( dist_max > eps){
+    int indice = 0;
+    while ( dist_max > eps && indice < 20){
         xKMinus1 = xK;
         for(int i = 0; i < m->row; i++){
             aux = 0;
@@ -76,8 +77,12 @@ int GaussJacobi::resolver(Matrix *m, double eps){
         }
         xK = result;
         dist_max = maximaDistancia(xKMinus1, xK, m->row);
+        for(int k = 0; k < m->row; k++){
+            cout << xK.at(k) << "\n";
+        }
+        indice++;
     }
         resposta = xK;
-        //FALTA SÓ A ITERAÇÃO E O TESTE DO ERRO
+        //FALTA SÓ O SEGUNDO TESTE
     return 0;
 }
