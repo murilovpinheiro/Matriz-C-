@@ -16,13 +16,14 @@ int main(){
     //eliminação de Gauss aparentemente funcionando
     //tá tendo aquela problema caso o valor seja MUITO próximo de 0
     //então quando o valor está em um limite tal, eu simplesmente aproximo pra 0
-    //pensar em como fazer pra adicionar o vetor de respostas
-    
 
-    //implementar depois o teste para o critério de convergência do Gauss Jacobi
+    //faltando alguns detalhes no GaussJacobi que vou organizar quando terminar o Seidel
+    
+    //limitei o numero maximo de iterações pro GaussJacobi a 20
+
     GaussJacobi GJ(3);
 
-    GJ.resolver(&m, 0.05);
+    GJ.resolver(&m, 0.0001);
 
     for(int i = 0; i < m.row; i++){
         cout << GJ.resposta[i] << '\n';

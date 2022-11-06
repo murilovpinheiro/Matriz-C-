@@ -1,4 +1,5 @@
 #include "../Headers/GaussJacobi.h"
+#include <limits.h>
 
 GaussJacobi::GaussJacobi(int n) : MetodoNumerico(n){}
 
@@ -62,9 +63,9 @@ int GaussJacobi::resolver(Matrix *m, double eps){
     //     cout << g.at(i)<<'\n';
     // }
     double aux;
-    double dist_max = 1000000;
-    int indice = 0;
-    while ( dist_max > eps && indice < 20){
+    double dist_max = numeric_limits<double>::max();
+    int contador = 0;
+    while ( dist_max > eps && contador < 20){
         xKMinus1 = xK;
         for(int i = 0; i < m->row; i++){
             aux = 0;
@@ -80,7 +81,7 @@ int GaussJacobi::resolver(Matrix *m, double eps){
         for(int k = 0; k < m->row; k++){
             cout << xK.at(k) << "\n";
         }
-        indice++;
+        contador++;
     }
         resposta = xK;
         //FALTA SÓ O SEGUNDO TESTE
