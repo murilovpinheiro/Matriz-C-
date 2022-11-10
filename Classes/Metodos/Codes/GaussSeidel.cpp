@@ -81,30 +81,27 @@ int GaussSeidel::resolver(Matrix* m, double eps){
     return 0;
 }
 
-int GaussSeidel::inversa(Matrix* m, Matrix* inversa){
+int GaussSeidel::resolverPorInversa(Matrix* m, Matrix* inversa){
     vector<double> b(m->row);
     Matrix vetorB(m->row, 1);
-    Matrix inv(m->row, m->column - 1);
+    Matrix inv(inversa->row, inversa->column);
     for(int i = 0; i < m->row; i++){
         vetorB.values.at(i).at(0) = m->values.at(i).at(m->column - 1);
         m->values.at(i).at(m->column - 1) = 0;
     }
     for(int i = 0; i < m->column - 1; i++){
         m->values.at(i).at(m->column - 1) = 1;
-        resolver(m, 0.0001);
-        m->print();
+        resolver(m, 0.05);
         for(int j = 0; j < m->column - 1; j++){
             inv.values.at(j).at(i) = resposta.at(j);
         }
-        cout << endl;
         m->values.at(i).at(m->column - 1) = 0;
     }
-    inv.print();
+    inversa->values = inv.values;
     inv.multMatrix(vetorB);
     for(int i = 0; i < m->row; i++){
         m->values.at(i).at(m->column - 1) = vetorB.values.at(i).at(0);
+        resposta.at(i) = inv.values.at(i).at(0);
     }
-    vetorB.print();
-    inv.print();
     return 0;
 }

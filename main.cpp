@@ -9,22 +9,25 @@ using namespace std;
 
 int main(){
     Matrix m(3, 4);
+    Matrix i(3, 3);
     m.inputValue(0, 0, 5); m.inputValue(0, 1, 1); m.inputValue(0, 2, 1); m.inputValue(0, 3, 5);
     m.inputValue(1, 0, 3); m.inputValue(1, 1, 4); m.inputValue(1, 2, 1); m.inputValue(1, 3, 6);
     m.inputValue(2, 0, 3); m.inputValue(2, 1, 3); m.inputValue(2, 2, 6); m.inputValue(2, 3, 0);
     
-    //eliminação de Gauss aparentemente funcionando
-    //tá tendo aquela problema caso o valor seja MUITO próximo de 0
-    //então quando o valor está em um limite tal, eu simplesmente aproximo pra 0
-
-    //faltando alguns detalhes no GaussJacobi que vou organizar quando terminar o Seidel
-    
     //limitei o numero maximo de iterações pro GaussJacobi a 20
 
-    GaussSeidel GJ(3);
+    GaussSeidel GS(3);
 
-    GJ.resolver(&m, 0.05);
-    GJ.inversa(&m, &m);
+    GaussJacobi GJ(3);
+
+    GS.resolverPorInversa(&m, &i);
+    GJ.resolverPorInversa(&m, &i);
+    for(int i = 0; i < m.row; i++){
+        cout << GS.resposta[i] << '\n';
+    }
+
+    cout << "------------------------------------\n";
+
     for(int i = 0; i < m.row; i++){
         cout << GJ.resposta[i] << '\n';
     }

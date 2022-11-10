@@ -15,5 +15,7 @@ class GaussJacobi : public MetodoNumerico{
     double maximaDistancia(vector<double> vetor1, vector<double> vetor2, int size);
 
     int resolver(Matrix* m, double eps);
+
+    int resolverPorInversa(Matrix* m, Matrix* inversa);
     
 };

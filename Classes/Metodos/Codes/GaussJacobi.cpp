@@ -86,3 +86,28 @@ int GaussJacobi::resolver(Matrix *m, double eps){
         resposta = xK;
     return 0;
 }
+
+int GaussJacobi::resolverPorInversa(Matrix* m, Matrix* inversa){
+    vector<double> b(m->row);
+    Matrix vetorB(m->row, 1);
+    Matrix inv(inversa->row, inversa->column);
+    for(int i = 0; i < m->row; i++){
+        vetorB.values.at(i).at(0) = m->values.at(i).at(m->column - 1);
+        m->values.at(i).at(m->column - 1) = 0;
+    }
+    for(int i = 0; i < m->column - 1; i++){
+        m->values.at(i).at(m->column - 1) = 1;
+        resolver(m, 0.05);
+        for(int j = 0; j < m->column - 1; j++){
+            inv.values.at(j).at(i) = resposta.at(j);
+        }
+        m->values.at(i).at(m->column - 1) = 0;
+    }
+    inversa->values = inv.values;
+    inv.multMatrix(vetorB);
+    for(int i = 0; i < m->row; i++){
+        m->values.at(i).at(m->column - 1) = vetorB.values.at(i).at(0);
+        resposta.at(i) = inv.values.at(i).at(0);
+    }
+    return 0;
+}
