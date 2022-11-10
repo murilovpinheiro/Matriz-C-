@@ -6,7 +6,7 @@ class GaussSeidel : public MetodoNumerico{
     public:
     GaussSeidel(int n);
 
-    int obterXZero(Matrix *m, vector<double>* XZero);
+    int obterXZero(Matrix *m, vector<double>* x0);
 
     int obterC(Matrix *m, vector<vector<double>> *c);
     

@@ -50,6 +50,8 @@ int GaussJacobi::resolver(Matrix *m, double eps){
     obterC(m, &c);
     obterG(m, &g);
     obterXZero(m, &xK);
+
+    //Debug caso eu queira ver quais são o x0, G e C obtidos
     // for(int i = 0; i < m->row; i++){
     //     cout << x0.at(i)<<'\n';
     // }
@@ -62,6 +64,7 @@ int GaussJacobi::resolver(Matrix *m, double eps){
     // for(int i = 0; i < m->row; i++){
     //     cout << g.at(i)<<'\n';
     // }
+
     double aux;
     double dist_max = numeric_limits<double>::max();
     int contador = 0;
@@ -78,12 +81,8 @@ int GaussJacobi::resolver(Matrix *m, double eps){
         }
         xK = result;
         dist_max = maximaDistancia(xKMinus1, xK, m->row);
-        for(int k = 0; k < m->row; k++){
-            cout << xK.at(k) << "\n";
-        }
         contador++;
     }
         resposta = xK;
-        //FALTA SÓ O SEGUNDO TESTE
     return 0;
 }
