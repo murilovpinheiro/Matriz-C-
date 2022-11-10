@@ -24,7 +24,7 @@ int main(){
     GaussSeidel GJ(3);
 
     GJ.resolver(&m, 0.05);
-
+    GJ.inversa(&m, &m);
     for(int i = 0; i < m.row; i++){
         cout << GJ.resposta[i] << '\n';
     }

@@ -80,3 +80,25 @@ int GaussSeidel::resolver(Matrix* m, double eps){
         resposta = xK;
     return 0;
 }
+
+int GaussSeidel::inversa(Matrix* m, Matrix* inversa){
+    vector<double> b(m->row);
+    vector<double> aux(m->row);
+    Matrix inv(m->row, m->column - 1);
+    for(int i = 0; i < m->row; i++){
+        aux.at(i) = m->values.at(i).at(m->column - 1);
+        m->values.at(i).at(m->column - 1) = 0;
+    }
+    for(int i = 0; i < m->column - 1; i++){
+        m->values.at(i).at(m->column - 1) = 1;
+        resolver(m, 0.0001);
+        m->print();
+        for(int j = 0; j < m->column - 1; j++){
+            inv.values.at(j).at(i) = resposta.at(j);
+        }
+        cout << endl;
+        m->values.at(i).at(m->column - 1) = 0;
+    }
+    inv.print();
+    return 0;
+}
