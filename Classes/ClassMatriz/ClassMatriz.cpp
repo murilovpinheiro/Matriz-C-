@@ -96,7 +96,7 @@ using namespace std;
         if(column == m1.row){
             vector<vector<double>> aux(row, vector<double>(column));
             for(int i = 0; i < row; i++){
-                for(int j = 0; j < row; j++){
+                for(int j = 0; j < m1.column; j++){
                     for(int k = 0; k < row; k++){
                         aux.at(i).at(j) += values.at(i).at(k) * m1.values.at(k).at(j);
                     }
