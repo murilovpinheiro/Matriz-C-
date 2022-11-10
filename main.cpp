@@ -20,15 +20,26 @@ int main(){
 
     GaussJacobi GJ(3);
 
-    GS.resolverPorInversa(&m, &i);
-    GJ.resolverPorInversa(&m, &i);
+    GS.resolverPorInversa(&m, &i, 0.000001);
+    for(int i = 0; i < m.row; i++){
+        cout << GS.resposta[i] << '\n';
+    }
+    cout << '\n';
+    GS.resolver(&m, 0.000001);
     for(int i = 0; i < m.row; i++){
         cout << GS.resposta[i] << '\n';
     }
 
+    GJ.resolverPorInversa(&m, &i, 0.01);
     cout << "------------------------------------\n";
-
     for(int i = 0; i < m.row; i++){
         cout << GJ.resposta[i] << '\n';
     }
+    cout << '\n';
+    GJ.resolver(&m, 0.01);
+    for(int i = 0; i < m.row; i++){
+        cout << GJ.resposta[i] << '\n';
+    }
+
+    //Valores obtidos pelas formas de resolver sao diferentes ou seja, posso utilizar isso na analise
 }

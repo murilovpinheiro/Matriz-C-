@@ -16,6 +16,6 @@ class GaussSeidel : public MetodoNumerico{
 
     int resolver(Matrix* m, double eps);
     
-    int resolverPorInversa(Matrix* m, Matrix* inversa);
+    int resolverPorInversa(Matrix* m, Matrix* inversa, double eps);
     
 };
