@@ -3,4 +3,5 @@
     MetodoNumerico::MetodoNumerico(int n){
         vector<double> aux(n);
         resposta = aux;
+        iteracoes = 0;
     }

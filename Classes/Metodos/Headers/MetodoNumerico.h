@@ -5,6 +5,7 @@
 class MetodoNumerico {
     public:
     vector<double> resposta;
+    int iteracoes;
 
     MetodoNumerico(int n);
 

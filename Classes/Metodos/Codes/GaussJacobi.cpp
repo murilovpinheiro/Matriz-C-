@@ -25,7 +25,7 @@ int GaussJacobi::obterC(Matrix *m, vector<vector<double>> *c){
 
 int GaussJacobi::obterG(Matrix *m, vector<double> *g){
     for(int i = 0; i < m->row; i++){
-        g->at(i) = m->values.at(i).at(m->column - 1) / m->values.at(i).at(i);
+        // g->at(i) = m->values.at(i).at(m->column - 1) / m->values.at(i).at(i);
     }
     return 0;
 }
@@ -42,6 +42,7 @@ double GaussJacobi::maximaDistancia(vector<double> vetor1, vector<double> vetor2
 }
 
 int GaussJacobi::resolver(Matrix *m, double eps){
+    iteracoes = 0;
     vector<double> xK(m->row);
     vector<double> xKMinus1(m->row);
     vector<double> result(m->row);
@@ -83,11 +84,14 @@ int GaussJacobi::resolver(Matrix *m, double eps){
         dist_max = maximaDistancia(xKMinus1, xK, m->row);
         contador++;
     }
+    iteracoes = iteracoes + contador;
         resposta = xK;
     return 0;
 }
 
 int GaussJacobi::resolverPorInversa(Matrix* m, Matrix* inversa, double eps){
+    int contador = 0;
+    iteracoes = 0;
     vector<double> b(m->row);
     Matrix vetorB(m->row, 1);
     Matrix inv(inversa->row, inversa->column);
@@ -98,6 +102,7 @@ int GaussJacobi::resolverPorInversa(Matrix* m, Matrix* inversa, double eps){
     for(int i = 0; i < m->column - 1; i++){
         m->values.at(i).at(m->column - 1) = 1;
         resolver(m, eps);
+        contador = contador + iteracoes;
         for(int j = 0; j < m->column - 1; j++){
             inv.values.at(j).at(i) = resposta.at(j);
         }
@@ -109,5 +114,6 @@ int GaussJacobi::resolverPorInversa(Matrix* m, Matrix* inversa, double eps){
         m->values.at(i).at(m->column - 1) = vetorB.values.at(i).at(0);
         resposta.at(i) = inv.values.at(i).at(0);
     }
+    iteracoes = contador;
     return 0;
 }

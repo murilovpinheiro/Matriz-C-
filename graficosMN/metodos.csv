@@ -1,0 +1,17 @@
+metodo,iteracoes,erromedio,epsilon
+GaussSeidelInverso,6,0.0291667,0.1
+GaussSeidelNormal,3,0.005625,0.1
+GaussJacobiInverso,5,0.220833,0.1
+GaussJacobiNormal,8,0.0288538,0.1
+GaussSeidelInverso,9,0.005625,0.01
+GaussSeidelNormal,4,0.00104167,0.01
+GaussJacobiInverso,21,0.0045612,0.01
+GaussJacobiNormal,15,0.00281996,0.01
+GaussSeidelInverso,17,2.625e-05,0.0001
+GaussSeidelNormal,7,4.03646e-06,0.0001
+GaussJacobiInverso,59,0.000535237,0.0001
+GaussJacobiNormal,20,0.000535237,0.0001
+GaussSeidelInverso,25,4.94792e-07,1e-06
+GaussSeidelNormal,9,6.74219e-08,1e-06
+GaussJacobiInverso,60,0.000535237,1e-06
+GaussJacobiNormal,20,0.000535237,1e-06
