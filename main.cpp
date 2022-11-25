@@ -124,7 +124,7 @@ int main(){
     GJ.resolverPorInversa(&m, &i, valorerro);
     quadroResposta("Gauss Jacobi Inverso", &i, GJ.resposta);
     
-    cout << "------------------------------------------" << endl << endl;
+    cout << "-------- Informações Extras ----------" << endl << endl;
 
     salvarArquivo("GaussSeidelInverso", GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
     printResultado("GaussSeidelInverso", GS.resposta, GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
