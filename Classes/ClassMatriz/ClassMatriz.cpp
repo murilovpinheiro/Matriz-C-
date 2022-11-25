@@ -107,3 +107,28 @@ using namespace std;
         }
         return -1;
     }
+
+    double Matrix::det(){
+        if (values.at(0).size() == 3) {
+            //para o caso 3x4 onde 3x3 é a matriz
+            //positivos
+            double a1 = values.at(0).at(0) * values.at(1).at(1) * values.at(2).at(2);
+            double a2 = values.at(0).at(1) * values.at(1).at(2) * values.at(2).at(0);
+            double a3 = values.at(0).at(2) * values.at(1).at(0) * values.at(2).at(1);
+            //negativos
+            double b1 = values.at(0).at(2) * values.at(1).at(1) * values.at(2).at(0);
+            double b2 = values.at(0).at(1) * values.at(1).at(0) * values.at(2).at(2);
+            double b3 = values.at(0).at(0) * values.at(1).at(2) * values.at(2).at(1);
+
+            return a1+a2+a3-b1-b2-b3;
+        } else if (values.at(0).size() == 2) {
+            //para o caso 2x3 onde 2x2 é a matriz
+            //positivos
+            double a1 = values.at(0).at(0) * values.at(1).at(1);
+            //negativos
+            double b1 = values.at(0).at(1) * values.at(1).at(0);
+
+            return a1-b1;
+        }
+        return 1.0; //nao calculado
+    }

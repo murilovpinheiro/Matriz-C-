@@ -30,4 +30,6 @@ class Matrix{
     int opMatrix(Matrix m1, function<double(double,double)> operation);
 
     int multMatrix(Matrix m1);
+
+    double det();
 };

@@ -24,13 +24,42 @@ double calculaErroMedio(vector<double> encontrados, vector<double> reais){
     return soma/encontrados.size();
 }
 
-int main(){
-    Matrix m(3, 4);
-    Matrix i(3, 3);
-    m.inputValue(0, 0, 5); m.inputValue(0, 1, 1); m.inputValue(0, 2, 1); m.inputValue(0, 3, 5);
-    m.inputValue(1, 0, 3); m.inputValue(1, 1, 4); m.inputValue(1, 2, 1); m.inputValue(1, 3, 6);
-    m.inputValue(2, 0, 3); m.inputValue(2, 1, 3); m.inputValue(2, 2, 6); m.inputValue(2, 3, 0);
+Matrix receberMatrizEntrada(){
+    int n; //deslocamentos
+    cout << "Digite o numero de deslocamentos N: ";
+    cin >> n;
     
+    double temp = 0.0;
+    Matrix M(n, n+1);
+    
+    cout << " -- Valores da matriz [A] --\n";
+    //dois for loops
+    for(int l=0; l<n; l++){ for(int c=0; c<n; c++){
+        cout << "digite o valor na linha "<< l <<" e coluna "<< c << ": ";
+        cin >> temp;
+        M.inputValue(l, c, temp);
+    }}
+    
+    cout << " -- Valores do vetor {b} --\n";
+    //um for loop
+    for(int p=0; p<n; p++){
+        cout << "digite o valor na posicao "<< p <<": ";
+        cin >> temp;
+        M.inputValue(p, n, temp);
+    }
+
+    return M;
+}
+
+int main(){
+    //Matrix m(3, 4);
+    //m.inputValue(0, 0, 5); m.inputValue(0, 1, 1); m.inputValue(0, 2, 1); m.inputValue(0, 3, 5);
+    //m.inputValue(1, 0, 3); m.inputValue(1, 1, 4); m.inputValue(1, 2, 1); m.inputValue(1, 3, 6);
+    //m.inputValue(2, 0, 3); m.inputValue(2, 1, 3); m.inputValue(2, 2, 6); m.inputValue(2, 3, 0);
+    
+    Matrix i(3, 3); //inversa
+    Matrix m = receberMatrizEntrada();
+
     double valorerro;
     cout << "Digite o valor do erro: ";
     cin >> valorerro;
