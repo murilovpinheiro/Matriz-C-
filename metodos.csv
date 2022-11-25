@@ -1,0 +1,4 @@
+GaussSeidelInverso,28,0.947734,0.0001
+GaussJacobiInverso,60,0.940576,0.0001
+GaussSeidelNormal,12,0.947735,0.0001
+GaussJacobiNormal,20,0.940576,0.0001

@@ -29,7 +29,7 @@ void printResultado(string metodo, vector<double> resposta, int iteracoes, doubl
     // arquivo << "\nerro medio: " << erromedio <<  "\nepsilon: "<< eps << "\n\n";
     // arquivo.close();
 
-    cout << metodo << "\niteracoes: " << iteracoes << "\nresultado: ";
+    cout << metodo << "\niteracoes: " << iteracoes << "\nresultado real: ";
     for(int i = 0; i < resposta.size(); i++){
         cout << resposta[i];
         if (i < resposta.size()-1){
@@ -37,6 +37,31 @@ void printResultado(string metodo, vector<double> resposta, int iteracoes, doubl
         }
     }
     cout << "\nerro medio: " << erromedio <<  "\nepsilon: "<< eps << "\n\n";
+}
+
+void quadroResposta(string nome, Matrix* inversa, vector<double> resultado){
+    cout << endl << nome << endl;
+    cout << "Matriz Inversa A^-1: " << endl;
+    Matrix inv(inversa->row, inversa->column);
+    inv.values = inversa->values;
+    for(int l = 0; l < inv.row; l++){
+        for(int c = 0; c < inv.column; c++){
+            cout << inv.values.at(l).at(c);
+            if (c < inv.column-1) {
+                cout << ", ";
+            } else {
+                cout << endl;
+            }
+        }
+    }
+    cout << "resultado obtido: ";
+    for(int i = 0; i < resultado.size(); i++){
+        cout << resultado[i];
+        if (i < resultado.size()-1){
+            cout << ", ";
+        }
+    }
+    cout << endl << endl;
 }
 
 double calculaErroMedio(vector<double> encontrados, vector<double> reais){
@@ -93,28 +118,34 @@ int main(){
     GaussSeidel GS(3);
     GaussJacobi GJ(3);
 
+    cout << " ---- QUADRO RESPOSTA ----";
     GS.resolverPorInversa(&m, &i, valorerro);
+    quadroResposta("Gauss Seidel Inverso", &i, GS.resposta);
+    GJ.resolverPorInversa(&m, &i, valorerro);
+    quadroResposta("Gauss Jacobi Inverso", &i, GJ.resposta);
+    
+    cout << "------------------------------------------" << endl << endl;
+
     salvarArquivo("GaussSeidelInverso", GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
     printResultado("GaussSeidelInverso", GS.resposta, GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
     // for(int i = 0; i < m.row; i++){
     //     cout << GS.resposta[i] << '\n';
     // }
 
-    GS.resolver(&m, valorerro);
-    salvarArquivo("GaussSeidelNormal", GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
-    printResultado("GaussSeidelNormal", GS.resposta, GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
-    // for(int i = 0; i < m.row; i++){
-    //     cout << GS.resposta[i] << '\n';
-    // }
-
-    cout << "------------------------------------------" << endl << endl;
-    GJ.resolverPorInversa(&m, &i, valorerro);
     salvarArquivo("GaussJacobiInverso", GJ.iteracoes, calculaErroMedio(GJ.resposta, reais), valorerro);
     printResultado("GaussJacobiInverso", GJ.resposta, GJ.iteracoes, calculaErroMedio(GJ.resposta, reais), valorerro);
     // for(int i = 0; i < m.row; i++){
     //     cout << GJ.resposta[i] << '\n';
     // }
 
+    cout << "------------------------------------------" << endl << endl;
+    
+    GS.resolver(&m, valorerro);
+    salvarArquivo("GaussSeidelNormal", GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
+    printResultado("GaussSeidelNormal", GS.resposta, GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
+    // for(int i = 0; i < m.row; i++){
+    //     cout << GS.resposta[i] << '\n';
+    // }
 
     cout << '\n';
     GJ.resolver(&m, valorerro);
