@@ -16,6 +16,29 @@ void salvarArquivo(string metodo, int iteracoes, double erromedio, double eps){
     arquivo.close();
 }
 
+void printResultado(string metodo, vector<double> resposta, int iteracoes, double erromedio, double eps){
+    // ofstream arquivo;
+    // arquivo.open("print.txt", std::ios_base::app);
+    // arquivo << metodo << "\niteracoes: " << iteracoes << "\nresultado: ";
+    // for(int i = 0; i < resposta.size(); i++){
+    //     arquivo << resposta[i];
+    //     if (i < resposta.size()-1){
+    //         arquivo << ", ";
+    //     }
+    // }
+    // arquivo << "\nerro medio: " << erromedio <<  "\nepsilon: "<< eps << "\n\n";
+    // arquivo.close();
+
+    cout << metodo << "\niteracoes: " << iteracoes << "\nresultado: ";
+    for(int i = 0; i < resposta.size(); i++){
+        cout << resposta[i];
+        if (i < resposta.size()-1){
+            cout << ", ";
+        }
+    }
+    cout << "\nerro medio: " << erromedio <<  "\nepsilon: "<< eps << "\n\n";
+}
+
 double calculaErroMedio(vector<double> encontrados, vector<double> reais){
     double soma = 0;
     for(int i = 0; i < encontrados.size(); i++){
@@ -63,33 +86,43 @@ int main(){
     double valorerro;
     cout << "Digite o valor do erro: ";
     cin >> valorerro;
+    cout << "\n\n";
     //limitei o numero maximo de iterações pro GaussJacobi a 20
     vector<double> reais{1, 1, -1};
 
     GaussSeidel GS(3);
     GaussJacobi GJ(3);
+
     GS.resolverPorInversa(&m, &i, valorerro);
     salvarArquivo("GaussSeidelInverso", GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
-    for(int i = 0; i < m.row; i++){
-        cout << GS.resposta[i] << '\n';
-    }
+    printResultado("GaussSeidelInverso", GS.resposta, GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
+    // for(int i = 0; i < m.row; i++){
+    //     cout << GS.resposta[i] << '\n';
+    // }
+
     GS.resolver(&m, valorerro);
     salvarArquivo("GaussSeidelNormal", GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
-    for(int i = 0; i < m.row; i++){
-        cout << GS.resposta[i] << '\n';
-    }
-    cout << "------------------------------------------" << endl;
+    printResultado("GaussSeidelNormal", GS.resposta, GS.iteracoes, calculaErroMedio(GS.resposta, reais), valorerro);
+    // for(int i = 0; i < m.row; i++){
+    //     cout << GS.resposta[i] << '\n';
+    // }
+
+    cout << "------------------------------------------" << endl << endl;
     GJ.resolverPorInversa(&m, &i, valorerro);
     salvarArquivo("GaussJacobiInverso", GJ.iteracoes, calculaErroMedio(GJ.resposta, reais), valorerro);
-    for(int i = 0; i < m.row; i++){
-        cout << GJ.resposta[i] << '\n';
-    }
+    printResultado("GaussJacobiInverso", GJ.resposta, GJ.iteracoes, calculaErroMedio(GJ.resposta, reais), valorerro);
+    // for(int i = 0; i < m.row; i++){
+    //     cout << GJ.resposta[i] << '\n';
+    // }
+
+
     cout << '\n';
     GJ.resolver(&m, valorerro);
     salvarArquivo("GaussJacobiNormal", GJ.iteracoes, calculaErroMedio(GJ.resposta, reais), valorerro);
-    for(int i = 0; i < m.row; i++){
-        cout << GJ.resposta[i] << '\n';
-    }
+    printResultado("GaussJacobiNormal", GJ.resposta, GJ.iteracoes, calculaErroMedio(GJ.resposta, reais), valorerro);
+    // for(int i = 0; i < m.row; i++){
+    //     cout << GJ.resposta[i] << '\n';
+    // }
 
     //Valores obtidos pelas formas de resolver sao diferentes ou seja, posso utilizar isso na analise
     //Aparentemente o Gauss Jacobi roda bem mais iteracoes do que o Gauss Seidel
