@@ -64,4 +64,6 @@ plotIteracoes()
 plotErro()
 #cheguei num resultado próximo ao desejado.
 
-#CASO ENTRE NESSE CÓDIGO LEIA O READM.MD DESSE ARQUIVO
+#######################################################
+#CASO ENTRE NESSE CÓDIGO LEIA O README.MD DESSE ARQUIVO
+#######################################################
