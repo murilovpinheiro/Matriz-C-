@@ -25,7 +25,7 @@ int GaussJacobi::obterC(Matrix *m, vector<vector<double>> *c){
 
 int GaussJacobi::obterG(Matrix *m, vector<double> *g){
     for(int i = 0; i < m->row; i++){
-        // g->at(i) = m->values.at(i).at(m->column - 1) / m->values.at(i).at(i);
+        g->at(i) = m->values.at(i).at(m->column - 1) / m->values.at(i).at(i);
     }
     return 0;
 }
