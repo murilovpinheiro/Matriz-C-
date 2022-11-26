@@ -26,11 +26,11 @@ def plotIteracoes():
         createLineIT(cores[i], nomes[i], metodos[i], dataframe, ax)
     ax.set_xlabel('Epsilon')
     ax.set_ylabel('Número de Iterações')
-    ax.set_title('Número de Iterações para os Diferentes no Benchmark')
+    ax.set_title('Número de Iterações para os Diferentes em Outro Exemplo')
     ax.set_xticks(x, ticks)
     ax.legend()
     ax.grid(which='both', color='grey', linewidth=1, linestyle='-', alpha=0.2)
-    fig.savefig("./graficosMN/Iteracao.png")
+    fig.savefig("./graficosMN/Gráficos/Iteracao2.png")
 
 def createLineER(cor, label, metodo, dataframe, ax):
     ticks = [0.001, 0.01, 0.05, 0.1]
@@ -53,11 +53,11 @@ def plotErro():
         createLineER(cores[i], nomes[i], metodos[i], dataframe, ax)
     ax.set_xlabel('Epsilon')
     ax.set_ylabel('Valor de Erro Médio')
-    ax.set_title('Erro Médio de Diferentes Métodos no Benchmark')
+    ax.set_title('Erro Médio de Diferentes Métodos em Outro Exemplo')
     ax.set_xticks(x, ticks)
     ax.legend()
     ax.grid(which='both', color='grey', linewidth=1, linestyle='-', alpha=0.2)
-    fig.savefig("./graficosMN/Erro.png")
+    fig.savefig("./graficosMN/Gráficos/Erro2.png")
 
 
 plotIteracoes()

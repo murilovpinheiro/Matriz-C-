@@ -1,12 +1,7 @@
-Pretendo fazer um makefile no futuro para fazer a implementação mais rápida
-Como não sei fazer ainda o makefile direitinho, abaixo há o comando para compilar o programa:
+Não fizemos um makefile, mas o main.exe enviado está 100% atualizado, caso queira compilar,
+segue abaixo o comando para compilar:
 
- g++ -o main.exe main.cpp ./Operations/operations.cpp ./Classes/ClassMatriz/ClassMatriz.cpp ./Classes/Metodos/Codes/MetodoNumerico.cpp ./Classes/Metodos/Codes/gauss.cpp ./Classes/Metodos/Codes/GaussJordan.cpp ./Classes/Metodos/Codes/LU.cpp ./Classes/Metodos/Codes/GaussJacobi.cpp ./Classes/Metodos/Codes/GaussSeidel.cpp ./Classes/EntradaSaida/EntradaSaida.cpp
-Gauss Seidel já está obtendo a inversa de A e resolver é trivial, só multiplicar essa inversa por B.
-Gauss Jacobi em breve vai ter isso também já que é basicamente o mesmo código.
-Ainda falta algumas coisas como o teste da linha e teste do determinante, provavelmente deixarei para a Equipe fazer isso
-
-Assim como a entrada e saída, que vai ficar por conta deles também
+g++ -o main.exe main.cpp ./Operations/operations.cpp ./Classes/ClassMatriz/ClassMatriz.cpp ./Classes/Metodos/Codes/MetodoNumerico.cpp ./Classes/Metodos/Codes/gauss.cpp ./Classes/Metodos/Codes/GaussJordan.cpp ./Classes/Metodos/Codes/LU.cpp ./Classes/Metodos/Codes/GaussJacobi.cpp ./Classes/Metodos/Codes/GaussSeidel.cpp ./Classes/EntradaSaida/EntradaSaida.cpp
 
 Obs: utilizo o vetor resposta como uma extensão de matriz principal
 Ex:
