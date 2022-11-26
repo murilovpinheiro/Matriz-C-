@@ -64,7 +64,7 @@ int GaussSeidel::resolver(Matrix* m, double eps){
     double aux;
     double dist_max = numeric_limits<double>::max();
     int contador = 0;
-    while ( dist_max > eps && contador < 20){
+    while ( dist_max > eps && contador < 100){
         xKMinus1 = xK;
         for(int i = 0; i < m->row; i++){
             aux = 0;
