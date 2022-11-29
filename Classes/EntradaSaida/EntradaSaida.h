@@ -20,7 +20,7 @@ class EntradaSaida {
 
     double calculaErroMedio(vector<double> encontrados, vector<double> reais);
 
-    Matrix receberMatrizEntrada();
+    Matrix receberMatrizEntrada(int &n);
 
 
 };

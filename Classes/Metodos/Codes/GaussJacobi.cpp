@@ -69,7 +69,7 @@ int GaussJacobi::resolver(Matrix *m, double eps){
     double aux;
     double dist_max = numeric_limits<double>::max();
     int contador = 0;
-    while ( dist_max > eps && contador < 100){
+    while (dist_max > eps && contador < 100){
         xKMinus1 = xK;
         for(int i = 0; i < m->row; i++){
             aux = 0;
@@ -84,6 +84,7 @@ int GaussJacobi::resolver(Matrix *m, double eps){
         dist_max = maximaDistancia(xKMinus1, xK, m->row);
         contador++;
     }
+
     iteracoes = iteracoes + contador;
         resposta = xK;
     return 0;
@@ -91,7 +92,6 @@ int GaussJacobi::resolver(Matrix *m, double eps){
 
 int GaussJacobi::resolverPorInversa(Matrix* m, Matrix* inversa, double eps){
     int contador = 0;
-    iteracoes = 0;
     vector<double> b(m->row);
     Matrix vetorB(m->row, 1);
     Matrix inv(inversa->row, inversa->column);

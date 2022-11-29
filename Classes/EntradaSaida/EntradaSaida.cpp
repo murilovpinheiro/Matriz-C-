@@ -66,8 +66,8 @@ double EntradaSaida::calculaErroMedio(vector<double> encontrados, vector<double>
     return soma/encontrados.size();
 }
 
-Matrix EntradaSaida::receberMatrizEntrada(){
-    int n; //deslocamentos
+Matrix EntradaSaida::receberMatrizEntrada(int &n){
+     //deslocamentos
     cout << "Digite o numero de deslocamentos N: ";
     cin >> n;
     

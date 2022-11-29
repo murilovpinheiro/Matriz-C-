@@ -27,19 +27,26 @@ Matrix benchmark(){
     // 5 1 1 5
     // 3 4 1 6
     // 3 3 6 0
+
+    
+    // m.inputValue(0, 0, 5); m.inputValue(0, 1, 1); m.inputValue(0, 2, 1); m.inputValue(0, 3, 5);
+    // m.inputValue(1, 0, 3); m.inputValue(1, 1, 4); m.inputValue(1, 2, 1); m.inputValue(1, 3, 6);
+    // m.inputValue(2, 0, 3); m.inputValue(2, 1, 3); m.inputValue(2, 2, 6); m.inputValue(2, 3, 0);
     return m;
 }
 
 int main(){
     EntradaSaida io;
-    Matrix i(3, 3); //inversa
-    Matrix m = io.receberMatrizEntrada();
+    int n;
+    
+    Matrix m = io.receberMatrizEntrada(n);
+    Matrix i(n, n); //inversa
     
     //ESSA PARTE É PARA CALCULAR A MATRIZ RECEBIDA ATRAVÉS DE GAUSS E UTILIZAR OS VALORES OBTIDOS COMO VALORES "REAIS"
     //DEPOIS UTILIZO ESSES VALORES REAIS COMO BASE PARA CALCULAR O ERRO DOS MÉTODOS
-    Matrix m2(3, 4);
+    Matrix m2(n, n + 1);
     m2.values = m.values;
-    Gauss G(3);
+    Gauss G(n);
     G.transformar(&m2);
     G.resolver(&m2);
     vector<double> reais = G.resposta;
@@ -50,8 +57,8 @@ int main(){
     cout << "\n\n";
     //limitei o numero maximo de iterações pro GaussJacobi a 20
     
-    GaussSeidel GS(3);
-    GaussJacobi GJ(3);
+    GaussSeidel GS(n);
+    GaussJacobi GJ(n);
 
     //O TRABALHO REQUER APENAS A RESOLUÇÃO POR INVERSA, MAS ACHAMOS QUE SERIA BOM COMPARAR COM OS MÉTODOS ATRAVÉS DA FORMA NORMAL
    
